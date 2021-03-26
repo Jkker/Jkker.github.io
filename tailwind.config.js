@@ -25,13 +25,14 @@ module.exports = {
       },
       colors: {
         blue: colors.lightBlue,
+        // blue: '#76d9e6',
         code: {
-          green: '#b5f4a5',
-          yellow: '#ffe484',
-          purple: '#d9a9ff',
-          red: '#ff8383',
-          blue: '#93ddfd',
-          white: '#fff',
+          green: '#a6e22e',
+          yellow: '#e6db74',
+          purple: '#a77afe',
+          red: '#f92672',
+          blue: '#66d9ef',
+          white: '#f8f8f2',
         },
       },
       typography: (theme) => ({
