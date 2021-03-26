@@ -7,9 +7,29 @@
       <language>en-us</language>
       <managingEditor>me@jerrykjia.com (Jerry K Jia)</managingEditor>
       <webMaster>me@jerrykjia.com (Jerry K Jia)</webMaster>
-      <lastBuildDate>Tue, 12 Jan 2021 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Fri, 19 Mar 2021 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://blog.jerrykjia.com/index.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://blog.jerrykjia.com/blog/web-server</guid>
+    <title>Building a HTTP Server From Scratch</title>
+    <link>https://blog.jerrykjia.com/blog/web-server</link>
+    <description>undefined</description>
+    <pubDate>Fri, 19 Mar 2021 00:00:00 GMT</pubDate>
+    <author>me@jerrykjia.com (Jerry K Jia)</author>
+    <category>Web</category><category>HTTP</category><category>Express.js</category><category>Node.js</category>
+  </item>
+
+  <item>
+    <guid>https://blog.jerrykjia.com/blog/nas</guid>
+    <title>零成本闲置笔记本改造家用 NAS</title>
+    <link>https://blog.jerrykjia.com/blog/nas</link>
+    <description>undefined</description>
+    <pubDate>Sat, 23 Jan 2021 00:00:00 GMT</pubDate>
+    <author>me@jerrykjia.com (Jerry K Jia)</author>
+    <category>NAS</category><category>DevOps</category><category>Docker</category><category>Linux</category>
+  </item>
+
   <item>
     <guid>https://blog.jerrykjia.com/blog/introducing-tailwind-nextjs-starter-blog</guid>
     <title>Introducing Tailwind Nexjs Starter Blog</title>

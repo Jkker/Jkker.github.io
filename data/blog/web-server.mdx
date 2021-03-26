@@ -1,0 +1,331 @@
+---
+title: Building a HTTP Server From Scratch
+date: '2021-03-19'
+tags: ['Web', 'HTTP', 'Express.js', 'Node.js']
+images: ['/static/images/web-server/Web_design_PNG.png']
+---
+
+<!-- ![img](Web_design_PNG.png) -->
+
+# Background
+
+This article is an attempt on implementing an application level HTTP server framework basing on NodeJS’s built-in TCP server (`net` module). We will not go down into the details of the transport layer, network layer, and of course, the physical layer. Those infrastructures are proficiently handled by NodeJS. And the purpose of this exercise is to gain a more holistic view of what is going on under the hood of every simple HTTP request and response.
+
+Disclaimer: this HTTP server we create will be utterly similar to its big brother `express.js`. So let’s just call it `inexpress.js`.
+
+# Built-in Modules We Use
+
+After we create a file `inexpress.js` in our `src` folder, put these lines at its top to import the modules we build our HTTP server off of.
+
+```js
+const net = require('net') // Node's built-in TCP server
+const fs = require('fs') // Grants access to the file system
+const path = require('path') // For parsing paths in the file system
+```
+
+# Some HTTP Protocol Basics
+
+We first build a few helper functions and objects fundamental to the HTTP protocol. **HTTP response status codes** indicate whether a specific HTTP request has been successfully completed. **MIME types** are labels used to identify which types of data the client is requesting.
+
+```js
+// Mappings from common status codes to descriptions
+const HTTP_STATUS_CODES = {
+  200: 'OK',
+  301: 'Moved Permanently',
+  404: 'Not Found',
+  500: 'Internal Server Error',
+}
+
+// Mappings from common file extensions to MIME type
+const MIME_TYPES = {
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  png: 'image/png',
+  html: 'text/html',
+  css: 'text/css',
+  txt: 'text/plain',
+}
+
+// Returns an extension based on file name
+const getExtension = (fileName) => path.extname(fileName).toLowerCase().slice(1)
+
+// Gives back MIME type based on file name
+const getMIMEType = (fileName) =>
+  MIME_TYPES[getExtension(fileName)] ? MIME_TYPES[getExtension(fileName)] : ''
+```
+
+# The Request Class
+
+Requests consists of the following elements:
+
+- An HTTP [method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods): most commonly `GET` and `POST`.
+- The path of the resource to fetch
+- The version of the HTTP protocol.
+- Optional [headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) .
+- Body (required for a `POST` request).
+
+For simplicity, we only extract the two most important fields from a client’s request —`method` and`path`.
+
+```js
+class Request {
+  constructor(s) {
+    const [method, reqPath, ...others] = s.split(' ')
+    this.method = method
+    this.path = reqPath
+    this.others = others
+  }
+}
+```
+
+# The Response Class
+
+Responses consist of the following elements:
+
+- The version of the HTTP protocol they follow.
+- A [status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), indicating if the request was successful, or not, and why.
+- A status message, a non-authoritative short description of the status code.
+- HTTP [headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers), like those for requests.
+- Optionally, a body containing the fetched resource.
+
+Functionalities we implement should allow us to set response headers, to invoke route handlers, and to send a response.
+
+```js
+class Response {
+  constructor(socket, statusCode = 200, version = 'HTTP/1.1') {
+    this.statusCode = statusCode
+    this.version = version
+    this.headers = {}
+    this.sock = socket
+    this.body = ''
+  }
+
+  // Method to set an http response header
+  set(name, value) {
+    this.headers[name] = value
+  }
+
+  // Invoke .end() on the tcp/ip socket
+  end() {
+    this.sock.end()
+  }
+
+  // Stringify the 1st line of a response
+  statusLineToString() {
+    return [this.version, this.statusCode, HTTP_STATUS_CODES[this.statusCode]].join(' ') + '\r\n'
+  }
+
+  // Stringify the response headers
+  headersToString() {
+    return (
+      Object.entries(this.headers)
+        .map((arr) => {
+          const [name, val] = arr
+          return `${name}: ${val}`
+        })
+        .join('\r\n') + '\r\n'
+    )
+  }
+
+  // Actually sending the response by writing to the TCP/IP socket
+  send(body) {
+    if (!('Content-Type' in this.headers)) {
+      this.set('Content-Type', 'text/html')
+    }
+    if (this.statusCode === 301) {
+      this.sock.write(this.statusLineToString() + this.headersToString() + '\r\n' + body)
+    } else {
+      this.sock.write(this.statusLineToString())
+      this.sock.write(this.headersToString())
+      this.sock.write('\r\n')
+      this.sock.write(body)
+    }
+    this.end()
+  }
+
+  // Set status code
+  status(statusCode) {
+    this.statusCode = statusCode
+    return this
+  }
+}
+```
+
+# The HTTP Server App
+
+Now that we have implemented the request and response objects, we will proceed on layering them onto a TCP/IP server to create a simple but functioning HTTP server.
+
+```js
+class App {
+  // Creates a tcp/ip server with the net module
+  constructor() {
+    this.routes = {}
+    this.server = net.createServer((sock) => this.handleConnection(sock))
+    this.middleware = null
+  }
+
+  // Invokes when an tcp/ip connection is established
+  handleConnection(sock) {
+    sock.on('data', (data) => this.handleRequest(sock, data))
+  }
+
+  // Determines if requested route exists and invokes the route handler function when approporiate
+  processRoutes(req, res) {
+    const key = this.createRouteKey(req.method, req.path)
+    if (key in this.routes) {
+      this.routes[key](req, res)
+    } else {
+      res.status = 404
+      res.send('Page not found')
+    }
+  }
+
+  // Invoked when the TCP socket receives data
+  handleRequest(sock, binaryData) {
+    const req = new Request(binaryData.toString())
+    const res = new Response(sock)
+    if (this.middleware) {
+      this.middleware(req, res, () => this.processRoutes(req, res))
+    } else {
+      this.processRoutes(req, res)
+    }
+  }
+
+  // Takes a path and normalizes casing and trailing slash. Additionally, removes the fragment or querystring if present (does not have to handle both query string and fragment in same path, though).
+  normalizePath(reqPath) {
+    const url = new URL('http://127.0.0.1' + reqPath)
+    const p = url.pathname.toLowerCase()
+    return p.endsWith('/') ? p.slice(0, -1) : p
+  }
+
+  // Takes a an http method and path, normalizes both, and concatenates them in order to create a key that uniquely identifies a route in the routes object (this will essentially be the property name)
+  createRouteKey(method, reqPath) {
+    return method.toString().toUpperCase() + ' ' + this.normalizePath(reqPath)
+  }
+
+  get(reqPath, callback) {
+    this.routes[this.createRouteKey('GET', reqPath)] = callback
+  }
+
+  //  Sets the middleware property for this instance of App
+  use(cb) {
+    this.middleware = cb
+  }
+
+  //  Binds the server to the given port and host ("listens" on host:port)
+  listen(port, host) {
+    this.server.listen(port, host)
+  }
+}
+```
+
+# Middlewares
+
+Middlewares can handle the logic in-between the request and the response. In this case, we are implementing a middleware function that serves a static file if it exists on the file system.
+
+```js
+function serveStatic(basePath) {
+  return (req, res, next) => {
+    const filePath = path.posix.join(basePath, req.path)
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        next()
+      } else {
+        res.set('Content-Type', getMIMEType(filePath))
+        res.send(data)
+      }
+    })
+  }
+}
+```
+
+# Exporting as a Module
+
+Now that our implementation suffices the basic functionalities of a HTTP server, we can export it as a module and test if it works.
+
+```js
+module.exports = {
+  HTTP_STATUS_CODES,
+  MIME_TYPES,
+  getExtension,
+  getMIMEType,
+  Request,
+  Response,
+  App,
+  static: serveStatic,
+}
+```
+
+# Use It in Action
+
+This HTTP server we created is utterly similar to `Express.js`. We can use it the same way we use `Express`.
+
+```js
+// app.js
+const inexpress = require('./inexpress.js')
+const path = require('path')
+const app = new inexpress.App()
+
+app.use(inexpress.static(path.join(__dirname, '..', 'public')))
+
+app.get('/img/animal1.jpg', function (req, res) {
+  res.send('animal1.jpg')
+})
+app.get('/img/animal2.jpg', function (req, res) {
+  res.send('animal2.jpg')
+})
+app.get('/img/animal3.jpg', function (req, res) {
+  res.send('animal3.jpg')
+})
+app.get('/img/animal4.jpg', function (req, res) {
+  res.send('animal4.jpg')
+})
+app.get('/', (req, res) => {
+  res.set('Content-Type', 'text/html')
+  res.send(`
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<link rel="stylesheet" href="/css/styles.css" />
+			</head>
+			<body>
+				<h1 class="title"><b>Cat</b>aholics Online</h1>
+				<a href="/gallery"><h3>Go to Gallery</h3></a>
+				<div> ^ Pet here</div>
+			</body>
+		</html>
+	`)
+})
+app.get('/css/styles.css', (req, res) => {
+  res.send('/css/styles.css')
+})
+app.get('/gallery', function (req, res) {
+  const random = Math.floor(Math.random() * 4) + 1
+  let images = ''
+  for (let i = random; i--; i >= 0) {
+    const src = `/img/animal${Math.floor(Math.random() * 4) + 1}.jpg`
+    images += `<img class='img' src=${src} alt='cat picture'/>`
+  }
+  res.send(`
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<link rel="stylesheet" href="/css/styles.css" />
+			</head>
+			<body>
+				<div class="content">
+					<h1>Here ${random === 1 ? 'your is one cat' : `are your ${random} cats`}</h1>
+					<div>${images}</div>
+				</div>
+			</body>
+		</html>
+	`)
+})
+app.get('/pics', (req, res) => {
+  res.set('Location', '/gallery')
+  res.status(301).send('Redirecting')
+})
+
+app.listen(3000, '127.0.0.1')
+```
+
+Now have fun!
