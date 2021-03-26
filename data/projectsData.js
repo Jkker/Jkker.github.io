@@ -2,7 +2,7 @@ const projectsData = [
   {
     title: 'Metasearch',
     description: `An intelligent search engine aggregator with high usability and customizability.`,
-    imgSrc: '/static/images/projects/Metasearch.png',
+    imgSrc: '/static/images/projects/metasearch.jpg',
     href: 'https://search.jerrykjia.com/',
   },
   {

@@ -21,7 +21,8 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        sans: ['Lexend', ...defaultTheme.fontFamily.sans],
+        title: ['Noto Sans SC', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         blue: colors.lightBlue,
@@ -64,7 +65,7 @@ module.exports = {
               color: theme('colors.gray.900'),
             },
             code: {
-              color: theme('colors.pink.500'),
+              color: theme('colors.red'),
               backgroundColor: theme('colors.gray.100'),
               paddingLeft: '4px',
               paddingRight: '4px',
@@ -90,6 +91,9 @@ module.exports = {
             blockquote: {
               color: theme('colors.gray.900'),
               borderLeftColor: theme('colors.gray.200'),
+            },
+            'h1,h2,h3,h4,h5,h6,strong': {
+              fontFamily: theme('fontFamily.title'),
             },
           },
         },

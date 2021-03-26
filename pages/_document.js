@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 class MyDocument extends Document {
   render() {
     return (
@@ -28,16 +28,32 @@ class MyDocument extends Document {
             as="style"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
           />
-          <link
+          {/* <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
             media="print"
             onLoad="this.media='all'"
-          />
+          /> */}
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap"
+            rel="stylesheet"
+            media="print"
+            onLoad="this.media='all'"
+          ></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Lexend&display=swap"
+            rel="stylesheet"
+            media="print"
+            onLoad="this.media='all'"
+          ></link>
           <noscript>
             <link
               rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+              href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap"
+            />
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Lexend&display=swap"
             />
           </noscript>
           <link
