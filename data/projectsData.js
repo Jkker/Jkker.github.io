@@ -14,7 +14,7 @@ const projectsData = [
   {
     title: 'Relieve Ü',
     description: `Imagine the Airbnb of restrooms, that's what RelieveU.online is. If you don't know where to go to the bathroom while in an unfamiliar place, RelieveU can help you search for the closest restroom.`,
-    imgSrc: '/static/images/projects/reliefu.png',
+    imgSrc: '/static/images/projects/reliefu.jpg',
     href: 'https://devpost.com/software/hackny-2019',
   },
 ]
