@@ -1,9 +1,8 @@
+import BlogList from '@/components/BlogList'
 import Link from '@/components/Link'
 import { PageSeo } from '@/components/SEO'
-import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
-import BlogList from '@/components/BlogList'
 
 const MAX_DISPLAY = 5
 const postDateTemplate = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -31,7 +30,7 @@ export default function Home({ posts }) {
             {siteMetadata.description}
           </p>
         </div>
-        <BlogList posts={posts}/>
+        <BlogList posts={posts} />
       </div>
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">

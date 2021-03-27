@@ -11,7 +11,7 @@ export default function BlogList({ posts }) {
       {posts.map((frontMatter) => {
         const { slug, date, title, summary, tags } = frontMatter
         return (
-          <li key={slug} className="py-12">
+          <li key={slug} className="py-4">
             <Link href={`/blog/${slug}`}>
               <article>
                 <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline shadow-md hover:shadow-xl p-12">
