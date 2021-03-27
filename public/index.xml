@@ -3,13 +3,23 @@
     <channel>
       <title>The Next Blog</title>
       <link>https://blog.jerrykjia.com/blog</link>
-      <description>A next-generation blog created with Next.js SSG and Tailwind.css</description>
+      <description>所谓无底深渊，下去也是前程万里  /  A next-generation blog created with Next.js SSG and Tailwind.css</description>
       <language>en-us</language>
       <managingEditor>me@jerrykjia.com (Jerry K Jia)</managingEditor>
       <webMaster>me@jerrykjia.com (Jerry K Jia)</webMaster>
-      <lastBuildDate>Fri, 19 Mar 2021 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Sun, 28 Mar 2021 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://blog.jerrykjia.com/index.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://blog.jerrykjia.com/blog/WebDev Notes</guid>
+    <title>Web Dev Notes | 我的Web开发笔记</title>
+    <link>https://blog.jerrykjia.com/blog/WebDev Notes</link>
+    <description>This article is an attempt on implementing an application level HTTP server framework basing on NodeJS’s built-in TCP server (`net` module). Through this exercise, we can gain a more holistic view of what's underlying every simple HTTP request and response.</description>
+    <pubDate>Sun, 28 Mar 2021 00:00:00 GMT</pubDate>
+    <author>me@jerrykjia.com (Jerry K Jia)</author>
+    <category>Web</category><category>HTTP</category><category>JavaScript</category><category>CSS</category><category>MongoDB</category><category>Express.js</category><category>Node.js</category>
+  </item>
+
   <item>
     <guid>https://blog.jerrykjia.com/blog/web-server</guid>
     <title>Building a HTTP Server From Scratch</title>
