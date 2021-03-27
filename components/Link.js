@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import Link from 'next/link'
+import ActiveLink from './ActiveLink'
 
 const CustomLink = ({ href, ...rest }) => {
   const isInternalLink = href && href.startsWith('/')
@@ -7,9 +7,9 @@ const CustomLink = ({ href, ...rest }) => {
 
   if (isInternalLink) {
     return (
-      <Link href={href}>
+      <ActiveLink href={href} activeClassName="active-link">
         <a {...rest} />
-      </Link>
+      </ActiveLink>
     )
   }
 

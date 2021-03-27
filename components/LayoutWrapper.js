@@ -1,10 +1,10 @@
-import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
-import Link from './Link'
-import SectionContainer from './SectionContainer'
+import siteMetadata from '@/data/siteMetadata'
 import Footer from './Footer'
+import Link from './Link'
 import MobileNav from './MobileNav'
+import SectionContainer from './SectionContainer'
 import ThemeSwitch from './ThemeSwitch'
 
 const LayoutWrapper = ({ children }) => {
@@ -12,7 +12,7 @@ const LayoutWrapper = ({ children }) => {
     <SectionContainer>
       <div className="flex flex-col justify-between h-screen">
         <header className="flex items-center justify-between py-10">
-          <div>
+          <div className="header-image">
             <Link href="/" aria-label="Tailwind CSS Blog">
               <div className="flex items-center justify-between">
                 <div className="mr-3">
@@ -29,17 +29,15 @@ const LayoutWrapper = ({ children }) => {
             </Link>
           </div>
           <div className="flex items-center text-base leading-5">
-            <div className="hidden sm:block">
-              {headerNavLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  className="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100"
-                >
-                  {link.title}
-                </Link>
-              ))}
-            </div>
+            {headerNavLinks.map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100 hidden sm:block custom-link relative"
+              >
+                {link.title}
+              </Link>
+            ))}
             <ThemeSwitch />
             <MobileNav />
           </div>
