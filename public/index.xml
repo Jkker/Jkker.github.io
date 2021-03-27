@@ -60,5 +60,15 @@
     <category>writings</category><category>book</category><category>reflection</category>
   </item>
 
+  <item>
+    <guid>https://blog.jerrykjia.com/blog/code-sample</guid>
+    <title>Sample .md file</title>
+    <link>https://blog.jerrykjia.com/blog/code-sample</link>
+    <description>Example of a markdown file with code blocks and syntax highlighting</description>
+    <pubDate>Tue, 08 Mar 2016 00:00:00 GMT</pubDate>
+    <author>me@jerrykjia.com (Jerry K Jia)</author>
+    <category>markdown</category><category>code</category><category>features</category>
+  </item>
+
     </channel>
   </rss>
