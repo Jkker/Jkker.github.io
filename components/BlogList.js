@@ -6,7 +6,7 @@ const postDateTemplate = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export default function BlogList({ posts }) {
   return (
-    <ul>
+    <ul className="blog-list">
       {!posts.length && 'No posts found.'}
       {posts.map((frontMatter) => {
         const { slug, date, title, summary, tags } = frontMatter

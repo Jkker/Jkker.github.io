@@ -1,6 +1,7 @@
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
 import siteMetadata from '@/data/siteMetadata'
+import ActiveLink from './ActiveLink'
 import Footer from './Footer'
 import Link from './Link'
 import MobileNav from './MobileNav'
@@ -30,13 +31,16 @@ const LayoutWrapper = ({ children }) => {
           </div>
           <div className="flex items-center text-base leading-5">
             {headerNavLinks.map((link) => (
-              <Link
+              <ActiveLink
                 key={link.title}
                 href={link.href}
                 className="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100 hidden sm:block custom-link relative"
+                activeClassName="active-link"
               >
-                {link.title}
-              </Link>
+                <a className="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100 hidden sm:block custom-link relative">
+                  {link.title}
+                </a>
+              </ActiveLink>
             ))}
             <ThemeSwitch />
             <MobileNav />
