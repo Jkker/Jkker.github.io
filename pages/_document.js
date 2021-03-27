@@ -35,21 +35,19 @@ class MyDocument extends Document {
             onLoad="this.media='all'"
           /> */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;800&display=swap"
             rel="stylesheet"
-            media="print"
-            onLoad="this.media='all'"
+            // media="print"
+            // onLoad="this.media='all'"
           ></link>
           <link
-            href="https://fonts.googleapis.com/css2?family=Lexend&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap"
             rel="stylesheet"
-            media="print"
-            onLoad="this.media='all'"
           ></link>
           <noscript>
             <link
               rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap"
+              href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap"
             />
             <link
               rel="stylesheet"
