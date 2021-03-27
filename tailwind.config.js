@@ -22,18 +22,28 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Lexend', ...defaultTheme.fontFamily.sans],
-        title: ['Noto Sans SC', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         blue: colors.lightBlue,
         // blue: '#76d9e6',
+        // 'blue-400': '#78dce8',
         code: {
-          green: '#a6e22e',
-          yellow: '#e6db74',
-          purple: '#a77afe',
-          red: '#f92672',
-          blue: '#66d9ef',
-          white: '#f8f8f2',
+          green: '#a9dc76',
+          yellow: '#ffd866',
+          orange: '#fc9867',
+          purple: '#ab9df2',
+          red: '#ff6188',
+          blue: '#78dce8',
+          white: '#fcfcfa',
+        },
+        gray: {
+          // 300: '#c1c0c0',
+          // 400: '#939293',
+          // 500: '#727072',
+          600: '#5b595c',
+          700: '#2D2A2E',
+          800: '#221F22',
+          900: '#19181A',
         },
       },
       typography: (theme) => ({
@@ -92,14 +102,12 @@ module.exports = {
               color: theme('colors.gray.900'),
               borderLeftColor: theme('colors.gray.200'),
             },
-            'h1,h2,h3,h4,h5,h6,strong': {
-              fontFamily: theme('fontFamily.title'),
-            },
           },
         },
         dark: {
           css: {
             color: theme('colors.gray.300'),
+            // backgroundColor: '#2D2A2E',
             a: {
               color: theme('colors.blue.500'),
               '&:hover': {
@@ -125,7 +133,10 @@ module.exports = {
               color: theme('colors.gray.100'),
             },
             code: {
-              backgroundColor: theme('colors.gray.800'),
+              backgroundColor: theme('colors.gray.700'),
+            },
+            '.prose,pre': {
+              backgroundColor: theme('colors.gray.700'),
             },
             hr: { borderColor: theme('colors.gray.700') },
             'ol li:before': {
