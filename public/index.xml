@@ -7,9 +7,19 @@
       <language>en-us</language>
       <managingEditor>me@jerrykjia.com (Jerry K Jia)</managingEditor>
       <webMaster>me@jerrykjia.com (Jerry K Jia)</webMaster>
-      <lastBuildDate>Sun, 28 Mar 2021 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Mon, 29 Mar 2021 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://blog.jerrykjia.com/index.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://blog.jerrykjia.com/blog/mdxtest.</guid>
+    <title>mdx-test</title>
+    <link>https://blog.jerrykjia.com/blog/mdxtest.</link>
+    <description>null</description>
+    <pubDate>Mon, 29 Mar 2021 00:00:00 GMT</pubDate>
+    <author>me@jerrykjia.com (Jerry K Jia)</author>
+    
+  </item>
+
   <item>
     <guid>https://blog.jerrykjia.com/blog/WebDev Notes</guid>
     <title>Web Dev Notes | 我的Web开发笔记</title>

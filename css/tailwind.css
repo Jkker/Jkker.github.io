@@ -26,10 +26,10 @@ html {
   h5,
   h6 {
     fontfamily: 'Noto Sans SC', 'Lexand', serif;
-    @apply mb-1;
+    @apply mb-1 flex items-center;
   }
 }
-.custom-link:hover::after{
+.custom-link:hover::after {
   content: '';
   height: 3px;
   width: 18px;
@@ -38,7 +38,6 @@ html {
   bottom: 0;
   margin-right: -9px;
   @apply bg-blue-500 dark:hover:text-blue-400;
-
 }
 
 .active-link::after {

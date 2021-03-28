@@ -13,6 +13,7 @@ export async function getStaticProps() {
   return { props: { posts } }
 }
 
+// TODO: Integrate metasearch
 export default function Home({ posts }) {
   return (
     <>
