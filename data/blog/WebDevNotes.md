@@ -535,7 +535,7 @@ All other allowed [HTML elements](https://html.spec.whatwg.org/multipage/infrast
 
 ## URL
 
-![计算机生成了可选文字: scheme host user-info path PO改 query fragment](WebDev Notes/clip_image001-1616851927221.png)
+![计算机生成了可选文字: scheme host user-info path PO改 query fragment](clip_image001-1616851927221.png)
 
 ## TCP/IP
 
@@ -546,7 +546,7 @@ _A stack of protocols_
 3. **Network Layer**: routing packets of data across network boundaries (**IP**)
 4. **Physical / Link Layer**: convert data to network signal & v.v.
 
-![5Б7В ](WebDev Notes/clip_image001-1616851799096.png)
+![5Б7В ](clip_image001-1616851799096.png)
 
 ### TCP vs UDP
 
@@ -575,11 +575,11 @@ S 收到 C 的确认报文后，通知其上层应用进程连接已建立。
 
 ### Connection / Disconnection Diagram
 
-![preview](WebDev Notes/clip_image001.jpg)
+![preview](clip_image001.jpg)
 
 ### OIS Model
 
-![计算机生成了可选文字: os惨考模型 应用层 会话层 传输层 一口 数据链路层 物理层 各层的解释 为应用程序提供服务 数据格亍专化、数据加密 建立、管理和户会话 建立、管理和户端到端的连接 IP选址及路由选择 提供介质访问和链路里 物理层 IWt/qq3952〕5](WebDev Notes/clip_image001.png)
+![计算机生成了可选文字: os惨考模型 应用层 会话层 传输层 一口 数据链路层 物理层 各层的解释 为应用程序提供服务 数据格亍专化、数据加密 建立、管理和户会话 建立、管理和户端到端的连接 IP选址及路由选择 提供介质访问和链路里 物理层 IWt/qq3952〕5](clip_image001.png)
 
 | OSI 七层网络模型        | TCP/IP 四层概念模型 | 对应网络协议                           |
 | ----------------------- | ------------------- | -------------------------------------- |
@@ -595,7 +595,7 @@ S 收到 C 的确认报文后，通知其上层应用进程连接已建立。
 
 ### Request
 
-![image-20210327213243071](WebDev Notes/image-20210327213243071.png)
+![image-20210327213243071](image-20210327213243071.png)
 
 #### Methods
 
@@ -623,7 +623,7 @@ Idempotent 幂等：请求无副作用，发送同样的请求一定会收到同
 
 ### Response
 
-![image-20210327213314307](WebDev Notes/image-20210327213314307.png)
+![image-20210327213314307](image-20210327213314307.png)
 
 #### Status Code
 
