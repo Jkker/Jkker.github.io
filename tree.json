@@ -1,0 +1,258 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "link",
+          "url": "#image",
+          "title": null,
+          "children": [],
+          "data": {
+            "hProperties": {
+              "ariaHidden": "true",
+              "tabIndex": -1
+            },
+            "hChildren": [
+              {
+                "type": "element",
+                "tagName": "span",
+                "properties": {
+                  "className": [
+                    "fas",
+                    "fa-link",
+                    "float-left",
+                    "text-lg",
+                    "-ml-8",
+                    "pr-4"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "value": "Image",
+          "position": {
+            "start": {
+              "line": 2,
+              "column": 4,
+              "offset": 4
+            },
+            "end": {
+              "line": 2,
+              "column": 9,
+              "offset": 9
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 2,
+          "column": 1,
+          "offset": 1
+        },
+        "end": {
+          "line": 2,
+          "column": 9,
+          "offset": 9
+        },
+        "indent": []
+      },
+      "data": {
+        "hProperties": {
+          "id": "image"
+        },
+        "id": "image"
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "/static/images/nas/Cyber-Server-Racks.jpeg",
+          "alt": "Server",
+          "position": {
+            "start": {
+              "line": 4,
+              "column": 1,
+              "offset": 11
+            },
+            "end": {
+              "line": 4,
+              "column": 54,
+              "offset": 64
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": "\n",
+          "position": {
+            "start": {
+              "line": 4,
+              "column": 54,
+              "offset": 64
+            },
+            "end": {
+              "line": 5,
+              "column": 1,
+              "offset": 65
+            },
+            "indent": [
+              1
+            ]
+          }
+        },
+        {
+          "type": "image",
+          "title": null,
+          "url": "mdxtest/City-Skyline.jpg",
+          "alt": "City",
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 1,
+              "offset": 65
+            },
+            "end": {
+              "line": 5,
+              "column": 34,
+              "offset": 98
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 4,
+          "column": 1,
+          "offset": 11
+        },
+        "end": {
+          "line": 5,
+          "column": 34,
+          "offset": 98
+        },
+        "indent": [
+          1
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "depth": 2,
+      "children": [
+        {
+          "type": "link",
+          "url": "#prism--highlighting",
+          "title": null,
+          "children": [],
+          "data": {
+            "hProperties": {
+              "ariaHidden": "true",
+              "tabIndex": -1
+            },
+            "hChildren": [
+              {
+                "type": "element",
+                "tagName": "span",
+                "properties": {
+                  "className": [
+                    "fas",
+                    "fa-link",
+                    "float-left",
+                    "text-lg",
+                    "-ml-8",
+                    "pr-4"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "value": "Prism / Highlighting",
+          "position": {
+            "start": {
+              "line": 7,
+              "column": 4,
+              "offset": 103
+            },
+            "end": {
+              "line": 7,
+              "column": 24,
+              "offset": 123
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 7,
+          "column": 1,
+          "offset": 100
+        },
+        "end": {
+          "line": 7,
+          "column": 24,
+          "offset": 123
+        },
+        "indent": []
+      },
+      "data": {
+        "hProperties": {
+          "id": "prism--highlighting"
+        },
+        "id": "prism--highlighting"
+      }
+    },
+    {
+      "type": "code",
+      "lang": "js",
+      "meta": null,
+      "value": "export function formatSlug(slug) {\n  return slug.replace(/\\.(mdx|md)/, '')\n}",
+      "position": {
+        "start": {
+          "line": 9,
+          "column": 1,
+          "offset": 125
+        },
+        "end": {
+          "line": 13,
+          "column": 4,
+          "offset": 211
+        },
+        "indent": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "position": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "offset": 0
+    },
+    "end": {
+      "line": 14,
+      "column": 1,
+      "offset": 212
+    }
+  }
+}

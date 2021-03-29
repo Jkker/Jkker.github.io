@@ -11,9 +11,9 @@
       <atom:link href="https://blog.jerrykjia.com/index.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://blog.jerrykjia.com/blog/mdxtest.</guid>
+    <guid>https://blog.jerrykjia.com/blog/mdxtest</guid>
     <title>mdx-test</title>
-    <link>https://blog.jerrykjia.com/blog/mdxtest.</link>
+    <link>https://blog.jerrykjia.com/blog/mdxtest</link>
     <description>null</description>
     <pubDate>Mon, 29 Mar 2021 00:00:00 GMT</pubDate>
     <author>me@jerrykjia.com (Jerry K Jia)</author>

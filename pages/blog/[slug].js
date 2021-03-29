@@ -1,10 +1,10 @@
-import fs from 'fs'
-import hydrate from 'next-mdx-remote/hydrate'
-import { getFiles, getFileBySlug, getAllFilesFrontMatter, formatSlug } from '@/lib/mdx'
-import PostLayout from '@/layouts/PostLayout'
 import MDXComponents from '@/components/MDXComponents'
 import PageTitle from '@/components/PageTitle'
+import PostLayout from '@/layouts/PostLayout'
 import generateRss from '@/lib/generate-rss'
+import { formatSlug, getAllFilesFrontMatter, getFileBySlug, getFiles } from '@/lib/mdx'
+import fs from 'fs'
+import hydrate from 'next-mdx-remote/hydrate'
 
 export async function getStaticPaths() {
   const posts = await getFiles('blog')
