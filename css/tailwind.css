@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './monokai-sublime.css';
 
 .remark-code-title {
   @apply px-5 py-3 font-mono text-sm font-bold text-gray-200 bg-gray-700 rounded-t;
@@ -25,7 +26,7 @@ html {
   h4,
   h5,
   h6 {
-    fontfamily: 'Noto Sans SC', 'Lexand', serif;
+    /* font-family: 'Noto Sans SC', 'Lexand', sans-serif; */
     @apply mb-1 flex items-center;
   }
 }
@@ -49,4 +50,16 @@ html {
   bottom: 0;
   margin-right: -9px;
   @apply bg-blue-500;
+}
+
+@layer utilities {
+  .dd-inline {
+    @apply ml-2 inline text-base font-medium text-gray-500 dark:text-gray-400;
+  }
+  .dt-inline {
+    @apply inline-block;
+  }
+  .v-rule {
+    @apply mx-2 border-l;
+  }
 }

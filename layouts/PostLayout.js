@@ -10,10 +10,14 @@ const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetdata.siteUrl}/blog/${slug}`)}`
 
 const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+function kFormatter(num) {
+  return Math.abs(num) > 999
+    ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
+    : Math.sign(num) * Math.abs(num)
+}
 
 export default function PostLayout({ children, frontMatter, next, prev }) {
-  const { slug, fileName, date, title, tags } = frontMatter
-
+  const { slug, fileName, date, title, tags, readingTime } = frontMatter
   return (
     <SectionContainer>
       <BlogSeo url={`${siteMetdata.siteUrl}/blog/${frontMatter.slug}`} {...frontMatter} />
@@ -24,14 +28,30 @@ export default function PostLayout({ children, frontMatter, next, prev }) {
               <div>
                 <PageTitle>{title}</PageTitle>
               </div>
-              <dl className="space-y-10">
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+              <dl className="article-info">
+                <div className="mt-6">
+                  <dt className="dt-inline">
+                    <i className="fa-fw far fa-calendar-alt mr-1"></i>Published on:
+                  </dt>
+                  <dd className="dd-inline">
                     <time dateTime={date}>
                       {new Date(date).toLocaleDateString(siteMetdata.locale, postDateTemplate)}
                     </time>
                   </dd>
+                </div>
+                <div className="article-info mt-2">
+                  <span className="v-rule"></span>
+                  <dt className="dt-inline">
+                    <i className="far fa-file-word fa-fw mr-1"></i>Word count:
+                  </dt>
+                  <dd className="dd-inline">{kFormatter(readingTime.words)}</dd>
+                  <span className="v-rule"></span>
+                  <dt className="dt-inline">
+                    <i className="far fa-clock fa-fw mr-1"></i>
+                    Reading time:
+                  </dt>
+                  <dd className="dd-inline">{Math.ceil(readingTime.minutes)} min</dd>
+                  <span className="v-rule"></span>
                 </div>
               </dl>
             </div>

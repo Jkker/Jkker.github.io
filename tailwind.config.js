@@ -26,6 +26,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Lexend', ...defaultTheme.fontFamily.sans],
+        mono: ['JetBrains Mono', 'ui-monospace', ...defaultTheme.fontFamily.mono],
       },
       colors: {
         blue: colors.lightBlue,
