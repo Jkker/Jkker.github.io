@@ -10,7 +10,8 @@ images: []
 ## Image
 
 ![City](City-Skyline.jpg)
-<!-- ![Server](/static/images/nas/Cyber-Server-Racks.jpeg) -->
+
+![Server](/static/images/nas/Cyber-Server-Racks.jpeg)
 
 <!-- ![Square](square.jpg) -->
 
