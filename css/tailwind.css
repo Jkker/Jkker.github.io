@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'antd/dist/antd.css';
 @import './monokai-sublime.css';
+@import './Search.css';
 
 .remark-code-title {
   @apply px-5 py-3 font-mono text-sm font-bold text-gray-200 bg-gray-700 rounded-t;
@@ -28,6 +30,23 @@ html {
   h6 {
     /* font-family: 'Noto Sans SC', 'Lexand', sans-serif; */
     @apply mb-1 flex items-center;
+  }
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea,
+  select {
+    @apply bg-transparent;
   }
 }
 .custom-link:hover::after {

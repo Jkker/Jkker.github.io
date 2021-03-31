@@ -8,6 +8,7 @@ module.exports = {
       safelist: ['type'], // [type='checkbox']
     },
   },
+  important: true,
   darkMode: 'class',
   theme: {
     'shadow-md': 'rgb(0 0 0 / 6%) 0px 9px 24px',
