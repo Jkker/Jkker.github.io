@@ -2,7 +2,6 @@
 import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 
-const queryString = require('query-string')
 const useQuery = function (defaultValues = {}) {
   const router = useRouter()
   const { pathname, query } = router

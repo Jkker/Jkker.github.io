@@ -1,7 +1,7 @@
-import LayoutWrapper from '@/components/LayoutWrapper'
 import MDXComponents from '@/components/MDXComponents'
 import { SEO } from '@/components/SEO'
 import '@/css/tailwind.css'
+import LayoutWrapper from '@/layouts/LayoutWrapper'
 import { MDXProvider } from '@mdx-js/react'
 import { DefaultSeo } from 'next-seo'
 import { ThemeProvider } from 'next-themes'

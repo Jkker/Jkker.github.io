@@ -13,7 +13,7 @@ export default function BlogList({ posts }) {
         return (
           <li key={slug} className="py-4">
             <Link href={`/blog/${slug}`}>
-              <article className="group space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline shadow-md transition-all duration-150 ease-in-out hover:shadow-xl focus:shadow-xl p-12">
+              <article className="group space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline card-shadow p-12">
                 {/* <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline shadow-md transition duration-150 ease-in-out hover:shadow-xl focus:shadow-xl p-12"> */}
                 <dl>
                   <dt className="sr-only">Published on</dt>
@@ -35,9 +35,9 @@ export default function BlogList({ posts }) {
                         ))}
                       </div>
                     </div>
-                    <div className="prose text-gray-500 max-w-none dark:text-gray-400">
+                    <summary className="prose text-gray-500 max-w-none dark:text-gray-400">
                       {summary}
-                    </div>
+                    </summary>
                   </div>
                   <div className="text-base font-medium leading-6">
                     {/* <div

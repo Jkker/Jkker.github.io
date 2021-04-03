@@ -73,12 +73,63 @@ html {
 
 @layer utilities {
   .dd-inline {
-    @apply ml-2 inline text-base font-medium text-gray-500 dark:text-gray-400;
+    @apply ml-2 inline text-xs font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap;
   }
   .dt-inline {
-    @apply inline-block;
+    @apply inline-block text-xs whitespace-nowrap;
   }
   .v-rule {
-    @apply mx-2 border-l;
+    @apply mx-2 border-l border-gray-200 dark:border-gray-600;
   }
+  .bg-img {
+    @apply fixed h-screen w-screen overflow-hidden z-0;
+  }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .card-shadow {
+    @apply shadow-md transition-all duration-150 ease-in-out hover:shadow-xl focus:shadow-xl;
+  }
+  .acrylic {
+    @apply bg-opacity-80 dark:bg-opacity-50;
+    backdrop-filter: saturate(180%) blur(5px);
+  }
+}
+
+/* Meta-search custom css */
+.meta-search-bar {
+  width: 584px;
+  max-width: 80vw;
+  margin-bottom: 40px;
+  border-radius: 20px;
+}
+.meta-search-bar * {
+  background: none;
+  color: white;
+  border: none;
+  border-radius: 0.4em;
+}
+.ant-input-affix-wrapper,
+.ant-btn {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(3px);
+  height: 40px;
+}
+.meta-search-bar ::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+.meta-search-bar .ant-btn {
+  background: #eee;
+}
+.meta-search-bar svg {
+  fill: gray;
+}
+#weather > div {
+  display: block;
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* background: rgba(255, 255, 255, 0.45); */
+  /* backdrop-filter: blur(3px); */
 }

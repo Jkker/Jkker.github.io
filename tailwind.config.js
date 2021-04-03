@@ -11,7 +11,6 @@ module.exports = {
   important: true,
   darkMode: 'class',
   theme: {
-    'shadow-md': 'rgb(0 0 0 / 6%) 0px 9px 24px',
     extend: {
       boxShadow: {
         md: 'rgb(0 0 0 / 6%) 0px 9px 24px',
@@ -113,7 +112,7 @@ module.exports = {
         dark: {
           css: {
             color: theme('colors.gray.300'),
-            // backgroundColor: '#2D2A2E',
+            backgroundColor: theme('colors.gray.900'),
             a: {
               color: theme('colors.blue.500'),
               '&:hover': {
@@ -141,7 +140,7 @@ module.exports = {
             code: {
               backgroundColor: theme('colors.gray.700'),
             },
-            '.prose,pre': {
+            pre: {
               backgroundColor: theme('colors.gray.700'),
             },
             hr: { borderColor: theme('colors.gray.700') },

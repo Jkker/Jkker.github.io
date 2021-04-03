@@ -1,13 +1,13 @@
-import fs from 'fs'
-import path from 'path'
-import { kebabCase } from '@/lib/utils'
+import BlogList from '@/components/BlogList'
+import PageTitle from '@/components/PageTitle'
+import { PageSeo } from '@/components/SEO'
+import siteMetadata from '@/data/siteMetadata'
+import generateRss from '@/lib/generate-rss'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
 import { getAllTags } from '@/lib/tags'
-import siteMetadata from '@/data/siteMetadata'
-import BlogList from '@/components/BlogList'
-import { PageSeo } from '@/components/SEO'
-import generateRss from '@/lib/generate-rss'
-
+import { kebabCase } from '@/lib/utils'
+import fs from 'fs'
+import path from 'path'
 const root = process.cwd()
 
 export async function getStaticPaths() {
@@ -48,6 +48,7 @@ export default function Tag({ posts, tag }) {
         description={`${tag} tags - ${siteMetadata.title}`}
         url={`${siteMetadata.siteUrl}/tags/${tag}`}
       />
+      <PageTitle>Tag: {tag}</PageTitle>
       <BlogList posts={posts} title={title} />
     </>
   )

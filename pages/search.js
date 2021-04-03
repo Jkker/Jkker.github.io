@@ -1,13 +1,12 @@
 import useQuery from '@/components/useQuery'
-// import { useHistory } from 'react-router-dom'
 import { frames, links } from '@/data/config.js'
-// import '@/css/Search.css'
 import { LinkOutlined } from '@ant-design/icons'
 import { Button, Divider, Dropdown, Input, Menu, Tabs } from 'antd'
 import mobile from 'ismobilejs'
-// import { ajax } from 'jquery'
 import { debounce } from 'lodash'
+import { useTheme } from 'next-themes'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -21,18 +20,23 @@ function useConstructor(callBack = () => {}) {
 }
 
 export default function Search() {
+  // Switch theme to light on load
+  const { theme, setTheme } = useTheme()
+  if (theme === 'dark') {
+    setTheme('light')
+  }
   const router = useRouter()
   // const { pathname, query } = router
 
   const [{ q, engine }, updateQuery] = useQuery()
-  const [inputKey, setInputKey] = useState(q)
-  const [searchKey, setSearchKey] = useState(q)
+  const [inputKey, setInputKey] = useState(q ? q : '')
+  const [searchKey, setSearchKey] = useState(q ? q : '')
   const [defaultEngine, setDefaultEngine] = useState(frames('', false)[0].title)
   const [hasProxy, setHasProxy] = useState(false)
 
   // Detect if user has proxy & switch tabs accordingly
-  /*   useConstructor(() => {
-    ajax({
+  useConstructor(() => {
+    /* ajax({
       type: 'GET',
       url: 'https://ipapi.co/jsonp/',
       async: false,
@@ -45,8 +49,25 @@ export default function Search() {
           : frames('', userHasProxy)[1].title
         setDefaultEngine(key)
       },
-    })
-  }) */
+    }) */
+    if (!DEBUG) {
+      fetch('https://ipapi.co/json/')
+        .then(function (response) {
+          response.json().then((jsonData) => {
+            console.log(jsonData)
+            const userHasProxy = jsonData.country === 'CN' ? false : true
+            setHasProxy(userHasProxy)
+            const key = userHasProxy
+              ? frames('', userHasProxy)[0].title
+              : frames('', userHasProxy)[1].title
+            setDefaultEngine(key)
+          })
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
+  })
 
   //* Core search functionality
 
@@ -159,66 +180,73 @@ export default function Search() {
   )
 
   return (
-    <>
-      <div className="app-container">
-        <div className="head-container">
-          <button onClick={handleReset}>
-            <Image src="/static/images/search-logo.png" alt="logo" height={36} width={36}></Image>
-          </button>
-          <Input.Search
-            className="search-bar-landing"
-            placeholder="蓦然回首，那人却在，灯火阑珊处"
-            value={inputKey}
-            onSearch={handleSetSearch}
-            onChange={handleInputChange}
-            size="large"
-            allowClear
-            ref={landingSearchBarRef}
-          />
-          <div className="links-container">
-            <Divider type="vertical" />
-            {isMobile ? (
-              <Dropdown overlay={menu}>
-                <Button className="dropdown-button" type="primary" ghost>
-                  Links <LinkOutlined />
-                </Button>
-              </Dropdown>
-            ) : (
-              menu
-            )}
-          </div>
-        </div>
-        <div className="body-container">
-          <Tabs activeKey={engine ? engine : defaultEngine} onTabClick={handleTabClick}>
-            {frames(encodeURIComponent(searchKey), hasProxy)
-              // .sort((a, b) => (b?.priority ?? 0) - (a?.priority ?? 0))
-              .map(({ title, link }) => (
-                <Tabs.TabPane key={title} tab={title} className="tabpane">
-                  {DEBUG ? (
-                    <dl>
-                      <dt>Search Key</dt>
-                      <dd>{searchKey}</dd>
-                      <dt>Engine</dt>
-                      <dd>{engine}</dd>
-                    </dl>
-                  ) : (
-                    <iframe
-                      title={title}
-                      className="frame"
-                      src={parseLink(link)}
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      loading="lazy"
-                      sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-                      referrerPolicy="no-referrer"
-                    />
-                  )}
-                </Tabs.TabPane>
-              ))}
-          </Tabs>
+    <div className="app-container">
+      <div className="head-container">
+        <Link href="/">
+          <a className="block my-1 mx-2 h-9">
+            <Image
+              src="/static/images/search-logo.png"
+              alt="logo"
+              layout="fixed"
+              height={36}
+              width={36}
+            ></Image>
+          </a>
+        </Link>
+
+        <Input.Search
+          className="block search-bar-landing"
+          placeholder="蓦然回首，那人却在，灯火阑珊处"
+          value={inputKey}
+          onSearch={handleSetSearch}
+          onChange={handleInputChange}
+          size="large"
+          allowClear
+          ref={landingSearchBarRef}
+        />
+        <div className="links-container">
+          <Divider type="vertical" />
+          {isMobile ? (
+            <Dropdown overlay={menu}>
+              <Button className="dropdown-button" type="primary" ghost>
+                Links <LinkOutlined />
+              </Button>
+            </Dropdown>
+          ) : (
+            menu
+          )}
         </div>
       </div>
-    </>
+      <div className="body-container">
+        <Tabs activeKey={engine ? engine : defaultEngine} onTabClick={handleTabClick}>
+          {frames(encodeURIComponent(searchKey), hasProxy)
+            // .sort((a, b) => (b?.priority ?? 0) - (a?.priority ?? 0))
+            .map(({ title, link }) => (
+              <Tabs.TabPane key={title} tab={title} className="tabpane">
+                {DEBUG ? (
+                  <dl>
+                    <dt>Search Key</dt>
+                    <dd>{searchKey}</dd>
+                    <dt>Engine</dt>
+                    <dd>{engine}</dd>
+                  </dl>
+                ) : (
+                  <iframe
+                    title={title}
+                    className="frame"
+                    src={parseLink(link)}
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    loading="lazy"
+                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+                    referrerPolicy="no-referrer"
+                  />
+                )}
+              </Tabs.TabPane>
+            ))}
+        </Tabs>
+      </div>
+    </div>
   )
 }
