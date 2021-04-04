@@ -16,28 +16,6 @@ export default function About() {
       <h2 className="my-4 text-2xl font-bold">Attribution & Acknowledgements</h2>
       <ul className="ml-4 sm:ml-8 list-disc">
         <li className="p-4">
-          Metasearch logo made by{' '}
-          <a className="link" href="https://www.freepik.com" title="Freepik">
-            Freepik
-          </a>{' '}
-          from{' '}
-          <a className="link" href="https://www.flaticon.com/" title="Flaticon">
-            www.flaticon.com
-          </a>
-        </li>
-        <li className="p-4">
-          Brand icons powered by{' '}
-          <a className="link" href="https://simpleicons.org/" title="Simple Icons">
-            Simple Icons
-          </a>
-        </li>
-        <li className="p-4">
-          Site bootstrapped with{' '}
-          <a className="link" href="https://github.com/timlrx/tailwind-nextjs-starter-blog">
-            Tailwind Nextjs Theme
-          </a>
-        </li>
-        <li className="p-4">
           React components created by{' '}
           <a className="link" href="https://ant.design/" title="Ant Design">
             Ant Design
@@ -50,7 +28,7 @@ export default function About() {
           </a>
         </li>
         <li className="p-4">
-          SSG / SSR Framework powered by{' '}
+          Static Site Generation (SSG), Server Side Rendering (SSR) powered by{' '}
           <a className="link" href="https://vercel.com/" title="Next.js">
             Next.js
           </a>
@@ -71,6 +49,28 @@ export default function About() {
           Font{' '}
           <a className="link" href="https://www.lexend.com/" title="Lexend">
             Lexend
+          </a>
+        </li>
+        <li className="p-4">
+          Metasearch logo made by{' '}
+          <a className="link" href="https://www.freepik.com" title="Freepik">
+            Freepik
+          </a>{' '}
+          from{' '}
+          <a className="link" href="https://www.flaticon.com/" title="Flaticon">
+            www.flaticon.com
+          </a>
+        </li>
+        <li className="p-4">
+          Brand icons provided by{' '}
+          <a className="link" href="https://simpleicons.org/" title="Simple Icons">
+            Simple Icons
+          </a>
+        </li>
+        <li className="p-4">
+          Site bootstrapped with{' '}
+          <a className="link" href="https://github.com/timlrx/tailwind-nextjs-starter-blog">
+            Tailwind Nextjs Theme
           </a>
         </li>
       </ul>
