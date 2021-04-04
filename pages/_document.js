@@ -1,9 +1,28 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
+import { GA_TRACKING_ID } from '../lib/gtag'
+
 class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
         <Head>
+          {/* Global site tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
           <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
           <link
             rel="icon"
@@ -17,12 +36,12 @@ class MyDocument extends Document {
             sizes="16x16"
             href="/static/favicons/favicon-16x16.png"
           />
-          <script src="https://kit.fontawesome.com/3002d4baed.js" crossOrigin="anonymous"></script>
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
           <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#000000" />
           <meta name="theme-color" content="#000000" />
           <link rel="alternate" type="application/rss+xml" href="/index.xml" />
+          {/* Fonts */}
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           {/* <link
             rel="preload"
@@ -63,7 +82,6 @@ class MyDocument extends Document {
             media="print"
             onLoad="this.media='all'"
           />
-
           <noscript>
             {/*   <link
               rel="preload"
@@ -111,6 +129,12 @@ class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
             integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j"
             crossOrigin="anonymous"
+          />
+          <script
+            src="https://kit.fontawesome.com/3002d4baed.js"
+            crossOrigin="anonymous"
+            media="print"
+            onLoad="this.media='all'"
           />
         </Head>
         <body className="antialiased text-black bg-white dark:bg-gray-900 dark:text-white">
