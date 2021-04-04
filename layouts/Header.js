@@ -8,7 +8,7 @@ import MobileNav from './MobileNav'
 export default function navbar({ override }) {
   return (
     <header
-      className={`fixed h-14 p-3 t-0 z-10 w-full flex items-center justify-between ${
+      className={`fixed h-14 p-3 t-0 z-50 w-full flex items-center justify-between ${
         override
           ? override
           : 'bg-white dark:bg-gray-800 acrylic shadow-md dark:shadow-none  bg-opacity-80 dark:bg-opacity-50 text-gray-900 dark:text-gray-100 '
@@ -34,7 +34,7 @@ export default function navbar({ override }) {
           </ActiveLink>
         ))}
         <ThemeSwitch override={override} />
-        <MobileNav />
+        <MobileNav override={override} />
       </nav>
     </header>
   )
