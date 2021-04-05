@@ -196,7 +196,7 @@ export default function Search() {
 
         <Input.Search
           className="block search-bar-landing"
-          placeholder="蓦然回首，那人却在，灯火阑珊处"
+          placeholder="搜你所想"
           value={inputKey}
           onSearch={handleSetSearch}
           onChange={handleInputChange}

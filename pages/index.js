@@ -76,7 +76,7 @@ export default function Home({ posts }) {
           ></Image>
           <div className="meta-search-bar">
             <Input.Search
-              placeholder="蓦然回首，那人却在，灯火阑珊处"
+              placeholder="搜你所想"
               size="large"
               allowClear
               onSearch={(value) =>
@@ -89,6 +89,21 @@ export default function Home({ posts }) {
               }
             />
           </div>
+          {/* <div className="meta-search-bar">
+            <input
+              placeholder="搜你所想"
+              className="w-36 max-w-4/5"
+              type="search"
+              onSearch={(value) =>
+                router.push({
+                  pathname: 'search',
+                  query: {
+                    q: value,
+                  },
+                })
+              }
+            />
+          </div> */}
         </div>
         <button
           className="absolute z-20 bottom-0 bg-transparent w-full outline-none hover:shadow-xl"
