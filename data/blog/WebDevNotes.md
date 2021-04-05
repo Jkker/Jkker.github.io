@@ -3,7 +3,7 @@ title: Web Dev Notes | 我的Web开发笔记
 date: '2021-03-28'
 tags: ['Web', 'HTTP', 'JavaScript', 'CSS', 'MongoDB', 'Express.js', 'Node.js']
 images: ['/static/images/web-server/Web_design_PNG.png']
-summary: This article is an attempt on implementing an application level HTTP server framework basing on NodeJS’s built-in TCP server (`net` module). Through this exercise, we can gain a more holistic view of what's underlying every simple HTTP request and response.
+summary: Everything one must know to become a competent full-stack web developer
 ---
 
 # JavaScript
