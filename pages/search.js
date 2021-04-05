@@ -9,6 +9,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import request from 'umi-request'
 
 const DEBUG = false
 // Custom constructor hook; run once before render
@@ -35,39 +36,22 @@ export default function Search() {
   const [hasProxy, setHasProxy] = useState(false)
 
   // Detect if user has proxy & switch tabs accordingly
-  useConstructor(() => {
-    /* ajax({
-      type: 'GET',
-      url: 'https://ipapi.co/jsonp/',
-      async: false,
-      dataType: 'jsonp',
-      success: function (res) {
-        const userHasProxy = res.country === 'CN' ? false : true
+  /*   useEffect(() => {
+    request
+      .get('/api/geoip')
+      .then(function (response) {
+        console.log(response)
+        const userHasProxy = response.country === 'CN' ? false : true
         setHasProxy(userHasProxy)
         const key = userHasProxy
           ? frames('', userHasProxy)[0].title
           : frames('', userHasProxy)[1].title
         setDefaultEngine(key)
-      },
-    }) */
-    if (!DEBUG) {
-      fetch('https://ipapi.co/json/')
-        .then(function (response) {
-          response.json().then((jsonData) => {
-            console.log(jsonData)
-            const userHasProxy = jsonData.country === 'CN' ? false : true
-            setHasProxy(userHasProxy)
-            const key = userHasProxy
-              ? frames('', userHasProxy)[0].title
-              : frames('', userHasProxy)[1].title
-            setDefaultEngine(key)
-          })
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    }
-  })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }, []) */
 
   //* Core search functionality
 
