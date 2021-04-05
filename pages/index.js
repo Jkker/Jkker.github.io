@@ -4,8 +4,6 @@ import siteMetadata from '@/data/siteMetadata'
 import Footer from '@/layouts/Footer'
 import Header from '@/layouts/Header'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
-import { Input } from 'antd'
-import mobile from 'ismobilejs'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -20,7 +18,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ posts }) {
-  const isMobile = mobile().any
+  const [searchKey, setSearchKey] = useState('')
   const router = useRouter()
   const [scrollPosition, setScrollPosition] = useState(0)
   const handleScroll = () => {
@@ -35,7 +33,14 @@ export default function Home({ posts }) {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
-
+  const handleSearch = () => {
+    router.push({
+      pathname: 'search',
+      query: {
+        q: searchKey,
+      },
+    })
+  }
   return (
     <>
       <PageSeo
@@ -44,28 +49,7 @@ export default function Home({ posts }) {
         url={siteMetadata.siteUrl}
       />
       <Header override={scrollPosition === 0 ? 'bg-transparent text-white' : false} />
-      {/* <Image
-          alt="background"
-          src="/static/images/alena-aenami-aenami-lunar.jpg"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          className="bg-img"
-        /> */}
-      {/* {!isMobile ? (
-        <img
-          alt="background"
-          src="https://ftp.bmp.ovh/imgs/2021/04/a6aee4cfa257e370.webp"
-          className="block object-cover overflow-hidden absolute t-0 b-0 l-0 b-0 m-0 w-screen h-screen z-10"
-        />
-      ) : (
-        <img
-          alt="background"
-          src="https://ftp.bmp.ovh/imgs/2021/04/04a93a5ed32d1758.webp"
-          className="block object-cover overflow-hidden absolute t-0 b-0 l-0 b-0 m-0 w-screen h-screen z-10"
-        />
-      )} */}
-      <div className="index-container h-screen relative z-30  bg-gray-700 bg-cover bg-no-repeat bg-center image">
+      <div className="index-container h-screen relative z-30  bg-gray-700 bg-cover bg-no-repeat bg-center image shadow-2xl">
         <div className="meta-search-index-page bg-transparent w-full h-full flex-center flex-col">
           <Image
             className="logo-center mb-4 opacity-90"
@@ -74,39 +58,47 @@ export default function Home({ posts }) {
             width={1004 / 2}
             alt="Metasearch Logo"
           ></Image>
-          <div className="meta-search-bar">
-            <Input.Search
-              placeholder="搜你所想"
-              size="large"
-              allowClear
-              onSearch={(value) =>
-                router.push({
-                  pathname: 'search',
-                  query: {
-                    q: value,
-                  },
-                })
-              }
-            />
-          </div>
-          {/* <div className="meta-search-bar">
+          <div className="meta-search-bar w-4/5 sm:max-w-lg relative ">
             <input
+              aria-label="Metasearch"
               placeholder="搜你所想"
-              className="w-36 max-w-4/5"
-              type="search"
-              onSearch={(value) =>
-                router.push({
-                  pathname: 'search',
-                  query: {
-                    q: value,
-                  },
-                })
-              }
+              type="text"
+              onChange={(e) => setSearchKey(e.target.value)}
+              className="w-full  text-gray-100 shadow focus:shadow-2xl bg-gray-100 dark:bg-gray-800 acrylic bg-opacity-40 dark:bg-opacity-50 rounded placeholder-gray-200 dark:placeholder-gray-500"
+              value={searchKey}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch()
+                }
+              }}
             />
-          </div> */}
+            <button
+              onClick={() => handleSearch()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch()
+                }
+              }}
+            >
+              <svg
+                className="absolute w-5 h-5 text-gray-100 right-3 top-2.5 text-opacity-70"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
         <button
-          className="absolute z-20 bottom-0 bg-transparent w-full outline-none hover:shadow-xl"
+          className="absolute z-20 bottom-0 bg-transparent w-full outline-none"
           onClick={() => window.scroll(0, window.innerHeight)}
         >
           <i className="fas fa-angle-down fa-2x text-white pb-2 animate-bounce"></i>
@@ -114,20 +106,6 @@ export default function Home({ posts }) {
       </div>
 
       <div className="blog-posts-container max-w-3xl px-4 mx-auto sm:px-6 xl:max-w-5xl xl:px-0 mt-16 mb-auto">
-        {/* <PageTitle>Recent Blogs</PageTitle>
-        <div className="py-2 flex justify-center items-center space-x-6">
-          <Image
-            src={siteMetadata.image}
-            alt="avatar"
-            height={40}
-            width={40}
-            className="rounded-full"
-          />
-          <dl className="text-sm font-medium leading-5 whitespace-nowrap">
-            <dt className="sr-only">Author Name</dt>
-            <dd className="text-gray-900 dark:text-gray-100">{siteMetadata.author}</dd>
-          </dl>
-        </div> */}
         <BlogList posts={posts} title="All Posts" />
       </div>
       <Footer />

@@ -34,7 +34,7 @@ html {
   [multiple],
   textarea,
   select {
-    @apply bg-transparent;
+    @apply bg-transparent shadow-none focus:shadow-none outline-none focus:outline-none border-none focus:border-transparent ring-0 focus:ring-0;
   }
   img {
     @apply opacity-100 duration-500 ease-in-out dark:opacity-70 dark:hover:opacity-100;
@@ -61,7 +61,6 @@ html {
     @apply shadow-md transition-all duration-150 ease-in-out hover:shadow-xl focus:shadow-xl;
   }
   .acrylic {
-    @apply bg-opacity-80 dark:bg-opacity-50;
     backdrop-filter: saturate(180%) blur(5px);
   }
   .acrylic-text {
@@ -120,38 +119,6 @@ html {
   }
 }
 
-/* Meta-search custom css */
-.meta-search-bar {
-  width: 584px;
-  max-width: 80vw;
-  margin-bottom: 40px;
-  border-radius: 20px;
-}
-.meta-search-bar * {
-  background: none;
-  color: white;
-  border: none;
-  border-radius: 0.4em;
-  @apply outline-none focus:outline-none;
-}
-.meta-search-bar .ant-input-affix-wrapper-focused {
-  @apply outline-none focus:outline-none;
-}
-.meta-search-bar .ant-input-affix-wrapper,
-.ant-btn {
-  @apply bg-gray-100 dark:bg-gray-800 bg-opacity-40 dark:bg-opacity-50  focus:shadow-xl;
-  backdrop-filter: saturate(180%) blur(5px);
-  height: 40px;
-}
-.meta-search-bar ::placeholder {
-  @apply opacity-70 text-gray-200 dark:text-gray-500;
-}
-.meta-search-bar .ant-btn {
-  @apply bg-gray-100 dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-50;
-}
-.meta-search-bar svg {
-  @apply mb-1 fill-current text-gray-800 dark:text-gray-100;
-}
 #weather > div {
   display: block;
   z-index: 3;

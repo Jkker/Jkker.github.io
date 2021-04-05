@@ -170,6 +170,8 @@ module.exports = {
     },
   },
   variants: {
+    outline: ['focus'],
+    border: ['focus'],
     typography: ['dark'],
     extend: {
       opacity: ['dark'],
