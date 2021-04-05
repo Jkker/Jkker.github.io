@@ -7,6 +7,7 @@ const ThemeSwitch = ({ override }) => {
 
   // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), [])
+  if (!mounted) return null
 
   return (
     <button

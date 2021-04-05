@@ -1,5 +1,4 @@
 import BlogList from '@/components/BlogList'
-import PageTitle from '@/components/PageTitle'
 import { PageSeo } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import Footer from '@/layouts/Footer'
@@ -57,16 +56,16 @@ export default function Home({ posts }) {
         <img
           alt="background"
           src="https://ftp.bmp.ovh/imgs/2021/04/a6aee4cfa257e370.webp"
-          className="block object-cover overflow-hidden absolute t-0 b-0 l-0 b-0 m-0 w-screen h-screen z-10 dark:dim"
+          className="block object-cover overflow-hidden absolute t-0 b-0 l-0 b-0 m-0 w-screen h-screen z-10"
         />
       ) : (
         <img
           alt="background"
           src="https://ftp.bmp.ovh/imgs/2021/04/04a93a5ed32d1758.webp"
-          className="block object-cover overflow-hidden absolute t-0 b-0 l-0 b-0 m-0 w-screen h-screen z-10 dark:dim"
+          className="block object-cover overflow-hidden absolute t-0 b-0 l-0 b-0 m-0 w-screen h-screen z-10"
         />
       )} */}
-      <div className="index-container h-screen relative z-30">
+      <div className="index-container h-screen relative z-30  bg-gray-700 bg-cover bg-no-repeat bg-center image">
         <div className="meta-search-index-page bg-transparent w-full h-full flex-center flex-col">
           <Image
             className="logo-center mb-4 opacity-90"

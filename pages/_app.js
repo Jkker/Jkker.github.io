@@ -21,7 +21,7 @@ export default function App({ Component, pageProps, router }) {
   }, [router.events])
 
   return (
-    <ThemeProvider attribute="class">
+    <ThemeProvider attribute="class" enableSystem={true} defaultTheme="system">
       <MDXProvider components={MDXComponents}>
         <Head>
           <meta content="width=device-width, initial-scale=1" name="viewport" />
