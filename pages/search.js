@@ -9,6 +9,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import useSWR from 'swr'
+
+const fetcher = (url) => fetch(url).then((r) => r.json())
 
 const DEBUG = false
 // Custom constructor hook; run once before render
@@ -20,6 +23,7 @@ function useConstructor(callBack = () => {}) {
 }
 
 export default function Search() {
+  const { data: geoData, error: geoError } = useSWR('/api/geoip/country', fetcher)
   // Switch theme to light on load
   const { theme, setTheme } = useTheme()
   if (theme === 'dark') {
@@ -35,39 +39,13 @@ export default function Search() {
   const [hasProxy, setHasProxy] = useState(false)
 
   // Detect if user has proxy & switch tabs accordingly
-  useConstructor(() => {
-    /* ajax({
-      type: 'GET',
-      url: 'https://ipapi.co/jsonp/',
-      async: false,
-      dataType: 'jsonp',
-      success: function (res) {
-        const userHasProxy = res.country === 'CN' ? false : true
-        setHasProxy(userHasProxy)
-        const key = userHasProxy
-          ? frames('', userHasProxy)[0].title
-          : frames('', userHasProxy)[1].title
-        setDefaultEngine(key)
-      },
-    }) */
-    if (!DEBUG) {
-      fetch('https://ipapi.co/json/')
-        .then(function (response) {
-          response.json().then((jsonData) => {
-            console.log(jsonData)
-            const userHasProxy = jsonData.country === 'CN' ? false : true
-            setHasProxy(userHasProxy)
-            const key = userHasProxy
-              ? frames('', userHasProxy)[0].title
-              : frames('', userHasProxy)[1].title
-            setDefaultEngine(key)
-          })
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    }
-  })
+  useEffect(() => {
+    console.log(geoData)
+    const userHasProxy = geoData?.country === 'CN' ? false : true
+    setHasProxy(userHasProxy)
+    const key = userHasProxy ? frames('', userHasProxy)[0].title : frames('', userHasProxy)[1].title
+    setDefaultEngine(key)
+  }, [geoData])
 
   //* Core search functionality
 
