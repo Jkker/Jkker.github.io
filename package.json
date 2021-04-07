@@ -53,6 +53,7 @@
     "remark-gemoji": "^6.0.0",
     "remark-graphviz": "^0.2.2",
     "remark-math": "^3.0.1",
+    "remark-mermaid": "^0.2.0",
     "remark-mermaid-reforged": "github:Jkker/remark-mermaid",
     "remark-normalize-headings": "^2.0.0",
     "remark-slug": "^6.0.0",
