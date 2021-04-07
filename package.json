@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "start": "next-remote-watch ./data",
-    "dev": "next dev -p 4000",
+    "dev": "next dev",
     "build": "next build && node ./scripts/generate-sitemap",
     "serve": "next start",
-    "analyze": "env ANALYZE=true next build"
+    "analyze": "env ANALYZE=true next build",
+    "postinstall": "node node_modules/puppeteer/install.js"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
@@ -84,7 +85,6 @@
     "unified": "^9.2.0",
     "unist-util-visit": "^2.0.3"
   },
-  "postinstall": "node node_modules/puppeteer/install.js",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

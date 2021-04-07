@@ -1,0 +1,10 @@
+graph LR
+C(Controller<br/>业务逻辑)
+M(Model<br/>数据持久)
+V(View<br/>用户界面)
+U(["用户"])
+
+U--输入-->V
+V--传输指令--> C
+C --"选取&处理数据"--> M
+M --提供数据--> V
