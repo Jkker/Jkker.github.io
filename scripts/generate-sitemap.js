@@ -26,7 +26,7 @@ const siteMetadata = require('../data/siteMetadata')
                   .replace('.js', '')
                   .replace('.mdx', '')
                   .replace('.md', '')
-                  .replace('/index.xml', '')
+                  .replace('/rss.xml', '')
                 const route = path === '/index' ? '' : path
                 return `
                         <url>

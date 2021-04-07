@@ -40,7 +40,7 @@ class MyDocument extends Document {
           <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#000000" />
           <meta name="theme-color" content="#000000" />
-          <link rel="alternate" type="application/rss+xml" href="/index.xml" />
+          <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
           {/* Fonts */}
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           {/* <link
@@ -60,7 +60,7 @@ class MyDocument extends Document {
             media="print"
             onLoad="this.media='all'"
           /> */}
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap"
             rel="preload"
             as="style"
@@ -69,18 +69,14 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
             rel="preload"
             as="style"
-          />
+          /> */}
           <link
             href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap"
             rel="stylesheet"
-            media="print"
-            onLoad="this.media='all'"
           />
           <link
             href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
             rel="stylesheet"
-            media="print"
-            onLoad="this.media='all'"
           />
           <noscript>
             {/*   <link
