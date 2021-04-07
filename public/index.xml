@@ -24,7 +24,7 @@
     <guid>https://blog.jerrykjia.com/blog/WebDevNotes</guid>
     <title>Web Dev Notes | 我的Web开发笔记</title>
     <link>https://blog.jerrykjia.com/blog/WebDevNotes</link>
-    <description>This article is an attempt on implementing an application level HTTP server framework basing on NodeJS’s built-in TCP server (`net` module). Through this exercise, we can gain a more holistic view of what's underlying every simple HTTP request and response.</description>
+    <description>Everything one must know to become a competent full-stack web developer</description>
     <pubDate>Sun, 28 Mar 2021 00:00:00 GMT</pubDate>
     <author>me@jerrykjia.com (Jerry K Jia)</author>
     <category>Web</category><category>HTTP</category><category>JavaScript</category><category>CSS</category><category>MongoDB</category><category>Express.js</category><category>Node.js</category>
