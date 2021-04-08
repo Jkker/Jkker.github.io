@@ -102,16 +102,10 @@ export default function Search() {
   }
 
   // Auto focus search bar after refresh
-  const indexSearchBarRef = useRef(null)
   const landingSearchBarRef = useRef(null)
   useEffect(() => {
-    if (searchKey) {
-      landingSearchBarRef?.current?.focus?.()
-      document.title = `${searchKey} - ${engine || defaultEngine}`
-    } else {
-      indexSearchBarRef?.current?.focus?.()
-      document.title = 'Metasearch - 探索未知'
-    }
+    landingSearchBarRef?.current?.focus?.()
+    document.title = `${searchKey} - ${engine || defaultEngine}`
   }, [searchKey, engine])
 
   // Detect if user is on mobile platform & parse link accordingly

@@ -6,7 +6,7 @@ import Header from '@/layouts/Header'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const MAX_DISPLAY = 5
 const postDateTemplate = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -25,10 +25,10 @@ export default function Home({ posts }) {
     const position = window.pageYOffset
     setScrollPosition(position)
   }
-
+  const searchBarRef = useRef()
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true })
-
+    searchBarRef.current.focus()
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
@@ -63,6 +63,7 @@ export default function Home({ posts }) {
               aria-label="Metasearch"
               placeholder="搜你所想"
               type="text"
+              ref={searchBarRef}
               onChange={(e) => setSearchKey(e.target.value)}
               className="w-full  text-gray-100 shadow focus:shadow-2xl bg-gray-100 dark:bg-gray-800 acrylic bg-opacity-40 dark:bg-opacity-50 rounded placeholder-gray-200 dark:placeholder-gray-500"
               value={searchKey}

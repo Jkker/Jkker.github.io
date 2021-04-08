@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "next-remote-watch ./data",
-    "dev": "next dev",
+    "start": "next-remote-watch ./data -p 4000",
+    "dev": "next dev -p 4000",
     "build": "next build && node ./scripts/generate-sitemap",
     "serve": "next start -p 4000",
     "analyze": "env ANALYZE=true next build",
