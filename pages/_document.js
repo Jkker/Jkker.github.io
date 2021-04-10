@@ -125,12 +125,6 @@ class MyDocument extends Document {
             integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j"
             crossOrigin="anonymous"
           />
-          <script
-            src="https://kit.fontawesome.com/3002d4baed.js"
-            crossOrigin="anonymous"
-            media="print"
-            onLoad="this.media='all'"
-          />
         </Head>
         <body className="antialiased text-black bg-white dark:bg-gray-900 dark:text-white">
           <Main />

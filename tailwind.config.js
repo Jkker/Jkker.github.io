@@ -29,7 +29,6 @@ module.exports = {
         mono: ['JetBrains Mono', 'ui-monospace', ...defaultTheme.fontFamily.mono],
       },
       colors: {
-        blue: colors.lightBlue,
         // blue: '#76d9e6',
         // 'blue-400': '#78dce8',
         code: {
@@ -49,6 +48,17 @@ module.exports = {
           700: '#2D2A2E',
           800: '#221F22',
           900: '#19181A',
+        },
+        blue: {
+          100: '#bae7ff',
+          200: '#91d5ff',
+          300: '#69c0ff',
+          400: '#40a9ff',
+          500: '#1890ff',
+          600: '#096dd9',
+          700: '#0050b3',
+          800: '#003a8c',
+          900: '#002766',
         },
       },
       typography: (theme) => ({

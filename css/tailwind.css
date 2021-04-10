@@ -83,7 +83,9 @@ html {
       background-image: url(https://ftp.bmp.ovh/imgs/2021/04/a6aee4cfa257e370.webp);
     }
   }
-
+  .responsive-element {
+    @apply border border-gray-300 dark:border-gray-600 border-solid focus:ring focus:border-blue-500 dark:focus:border-blue-500  hover:border-blue-500 dark:hover:border-blue-500 ring-blue-400 ring-opacity-40 duration-200;
+  }
   .remark-code-title {
     @apply px-5 py-3 font-mono text-sm font-bold text-gray-200 bg-gray-700 rounded-t;
   }

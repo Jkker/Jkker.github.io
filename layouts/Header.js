@@ -33,7 +33,7 @@ export default function navbar({ override }) {
             <a className="p-2 sm:p-3  hidden sm:block custom-link relative">{link.title}</a>
           </ActiveLink>
         ))}
-        <ThemeSwitch override={override} />
+        <ThemeSwitch override={override} className="ml-1 mr-1 sm:ml-4" />
         <MobileNav override={override} />
       </nav>
     </header>
