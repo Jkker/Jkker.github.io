@@ -1,0 +1,56 @@
+---
+title: Campuswire Upvote Bot
+date: '2021-04-09'
+tags: []
+draft: false
+summary:
+images: []
+---
+
+[中文版]()
+
+## Why Would U Wanna Do Dis
+
+Are you and your classmates struggling with Campuswire participation grades? It's clear to all of us that this mandatory participation alongside a competitive grading method benefits nobody and jeopardizes collaboration in the process of learning.
+
+It's a pain in the ass to manually upvote your classmates' replies. Just copy-paste the snippet below and it will do the work for you automatically!
+
+## Simple Steps to Take
+
+This won't take you any longer than a minute or two.
+
+1. Sign in to your [Campuswire](https://campuswire.com/signin) account.
+2. Go to [Class feed](https://campuswire.com/c).
+3. Press `F12` on your keyboard.
+   (Or `right click` anywhere on the page & click `inspect` on the pop-up).
+4. Go to the `Console` panel & scroll to the bottom.
+5. Copy-paste the code below.
+6. Press `Enter`.
+
+```js
+const delayFor = (ms) => new Promise((resolve) => setTimeout(() => resolve(), ms))
+;(async () => {
+  for (let p of document.querySelectorAll('div.post-preview-wrapper')) {
+    p.click()
+    await delayFor(3000)
+    document.querySelectorAll('div.spark').forEach((b) => {
+      b.click()
+    })
+    await delayFor(1000)
+  }
+})()
+```
+
+**Now You’re a DAD**
+
+This snippet will only upvote replies in the first 20 or so posts. You can scroll down if you want to proceed further. Refresh or close the Campuswire tab or your browser to terminate the execution.
+
+## 为什么要这么做？
+
+别卷了，读书人。帮帮你可怜的同学们吧。
+
+手动给同学们的回复加分很麻烦。只要复制粘贴下面的片段，它就会自动帮你完成这项工作!
+
+简单的步骤
+
+这不会花费你超过一两分钟的时间。
