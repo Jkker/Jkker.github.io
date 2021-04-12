@@ -5,13 +5,10 @@ import { useCallback, useMemo } from 'react'
 const useQuery = function (defaultValues = {}) {
   const router = useRouter()
   const { pathname, query } = router
-  // const { pathname, search } = useLocation()
-  // const history = useHistory()
-  // const query = queryString.parse(search)
   const updateQuery = useCallback(
     function (updatedParams) {
       const newQuery = Object.assign({}, query, updatedParams)
-      router.push({ pathname, query: newQuery })
+      router.push({ pathname, query: newQuery }, undefined, { shallow: true })
     },
     [query, pathname]
   )

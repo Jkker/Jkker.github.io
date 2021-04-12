@@ -5,6 +5,7 @@ import { Divider, Dropdown, Menu, Tabs } from 'antd'
 import mobile from 'ismobilejs'
 import { debounce } from 'lodash'
 import { useTheme } from 'next-themes'
+import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -21,11 +22,13 @@ export default function Search() {
 
   const router = useRouter()
   const { resolvedTheme } = useTheme()
-  const [{ q, engine }, updateQuery] = useQuery()
-  const [inputKey, setInputKey] = useState(q ? q : '')
-  const [searchKey, setSearchKey] = useState(q ? q : '')
   const [defaultEngine, setDefaultEngine] = useState(frames('', false)[0].title)
+  const [{ q, engine }, updateQuery] = useQuery({ q: '', engine: defaultEngine })
+  const [inputKey, setInputKey] = useState(q ? q : '')
+  // const [q, setSearchKey] = useState(q ? q : '')
   const [hasProxy, setHasProxy] = useState(false)
+  const isMobile = mobile().any
+  const platform = isMobile ? 'mobile' : 'desktop'
 
   // Detect if user has proxy & switch tabs accordingly
   useEffect(() => {
@@ -38,22 +41,28 @@ export default function Search() {
   //* Core search functionality
 
   const handleSetSearch = (key) => {
-    if (key === searchKey) {
+    const trimmedKey = key.trim()
+    if (isMobile) {
+      landingSearchBarRef?.current?.blur?.()
+    }
+    if (trimmedKey === q) {
       setRefresher(refresher + 1)
       return
     } else {
-      setSearchKey(key)
+      // setSearchKey(key)
+      updateQuery({ q: trimmedKey, engine })
     }
   }
-  const debounceSetSearch = useCallback(debounce(handleSetSearch, 1000), [searchKey])
-  const handleSetSearchQuery = (key) => {
+  const debounceSetSearch = useCallback(debounce(handleSetSearch, 1000), [q, engine])
+
+  /* const handleSetSearchQuery = (key) => {
     if (key === q) {
       return
     } else {
       updateQuery({ q: key })
     }
   }
-  const debounceSetSearchQuery = useCallback(debounce(handleSetSearchQuery, 1000), [engine])
+  const debounceSetSearchQuery = useCallback(debounce(handleSetSearchQuery, 1000), [engine]) */
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -61,22 +70,21 @@ export default function Search() {
     if (key === inputKey) {
       return
     } else {
-      debounceSetSearch(key)
-      debounceSetSearchQuery(key)
+      if (!isMobile) {
+        debounceSetSearch(key)
+      }
+      // debounceSetSearchQuery(key)
       setInputKey(key)
     }
   }
   // Handle search query change
   useEffect(() => {
     setInputKey(q ?? '')
-    if (q !== searchKey) {
-      handleSetSearch(q)
-    }
   }, [q])
 
   // When logo or clear button is clicked
   const handleReset = () => {
-    router.push(`/search?q=&${engine ? 'engine=' + engine : ''}`)
+    router.push(`/search?q=&${engine ? 'engine=' + engine : ''}`, undefined, { shallow: true })
     setInputKey('')
     handleSetSearch('')
   }
@@ -89,23 +97,22 @@ export default function Search() {
     updateQuery({ engine: tabKey })
   }
 
-  // Auto focus search bar after refresh
+  // Auto focus search bar after refresh on desktop
   const landingSearchBarRef = useRef(null)
   useEffect(() => {
-    landingSearchBarRef?.current?.focus?.()
-    document.title = `${searchKey} - ${engine || defaultEngine}`
-  }, [searchKey, engine])
+    if (!isMobile) {
+      landingSearchBarRef?.current?.focus?.()
+    }
+  }, [q, engine])
 
   // Detect if user is on mobile platform & parse link accordingly
-  const isMobile = mobile().any
-  const platform = isMobile ? 'mobile' : 'desktop'
   const parseLink = (link) => {
     return link?.[platform] ?? link
   }
 
   const menu = isMobile ? (
     <Menu>
-      {links(encodeURIComponent(searchKey)).map(({ link, title }) => (
+      {links(encodeURIComponent(q)).map(({ link, title }) => (
         <Menu.Item key={title}>
           <a
             title={title}
@@ -126,6 +133,11 @@ export default function Search() {
 
   return (
     <div className="app-container flex flex-col h-screen w-screen">
+      <Head>
+        <title>
+          {q} - {engine || defaultEngine}
+        </title>
+      </Head>
       <div className="h-9 flex max-w-screen mt-2 justify-between items-center flex-nowrap text-center flex-none head-container bg-white dark:bg-gray-900">
         <Link href="/">
           <a className="block my-1 mx-2 h-8 flex-none">
@@ -147,14 +159,31 @@ export default function Search() {
             onChange={handleInputChange}
             className="flex-auto ring-opacity-50 w-full h-9 rounded-sm text-black dark:text-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 rounded-r-none bg-gray-100"
             value={inputKey}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleSetSearch(inputKey)
+            onKeyDown={({ key }) => {
+              switch (key) {
+                case 'Enter': {
+                  handleSetSearch(inputKey)
+                  break
+                }
+                case 'Escape': {
+                  handleReset()
+                  break
+                }
+                default:
+                  break
               }
             }}
           />
           <div className="absolute text-gray-800 dark:text-gray-100 right-3 top-0 text-opacity-70 flex items-center justify-evenly space-x-4 h-full">
-            <button className="reset button" onClick={handleReset}>
+            <button
+              className="reset button"
+              onClick={handleReset}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') {
+                  handleReset()
+                }
+              }}
+            >
               <svg
                 className="w-3 h-3 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400"
                 aria-hidden="true"
@@ -211,7 +240,7 @@ export default function Search() {
             </Dropdown>
           ) : (
             <>
-              {links(encodeURIComponent(searchKey)).map(({ link, title }) => (
+              {links(encodeURIComponent(q)).map(({ link, title }) => (
                 <a
                   title={title}
                   key={title}
@@ -237,16 +266,17 @@ export default function Search() {
           activeKey={engine ? engine : defaultEngine}
           onTabClick={handleTabClick}
         >
-          {frames(encodeURIComponent(searchKey), hasProxy)
+          {frames(encodeURIComponent(q), hasProxy)
             // .sort((a, b) => (b?.priority ?? 0) - (a?.priority ?? 0))
             .map(({ title, link }) => (
               <Tabs.TabPane key={title} tab={title} className="tabpane">
                 {DEBUG ? (
                   <ul className="ml-24 h-full flex flex-col justify-center leading-loose list-disc dark:text-white">
-                    <li>Search Key: {searchKey}</li>
+                    <li>Search Key: {q}</li>
                     <li>Engine: {engine}</li>
                     <li>Country: {geoData?.country}</li> <li>IP: {geoData?.ip}</li>
                     <li>Theme: {resolvedTheme}</li>
+                    <li>Query: {q}</li>
                   </ul>
                 ) : (
                   <iframe
