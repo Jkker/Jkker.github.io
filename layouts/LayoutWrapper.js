@@ -2,7 +2,7 @@ import Footer from '@/layouts/Footer'
 import Header from '@/layouts/Header'
 
 const LayoutWrapper = ({ children, path }) => {
-  const section = !['/search', '/'].includes(path)
+  const section = !['/search', '/', '/test'].includes(path)
   return (
     <>
       {section ? (
